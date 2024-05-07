@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bejelentkezés - Digitális Könyvtár</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Kezdőlap</a></li>
+                <li><a href="books.html">Könyvek</a></li>
+                <li><a href="rent-a-book.html">Könyv Bérlése</a></li>
+                <li><a href="rented-books.html">Bérelt Könyvek</a></li>
+                <li><a href="login.html">Bejelentkezés</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="login">
+        <h2>Bejelentkezés</h2>
+        <form action="your-server-endpoint" method="POST">
+            <div class="form-group">
+                <label for="email">E-mail cím:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Jelszó:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Bejelentkezés</button>
+        </form>
+        <p>Még nincs fiókod? <a href="register.html">Regisztrálj itt</a></p>
+    </section>
+
+    <footer>
+        <p>Digitális Könyvtár © 2024</p>
+    </footer>
+</body>
+</html>
