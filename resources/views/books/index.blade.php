@@ -16,6 +16,19 @@
 
     <a href="{{ route('books.create') }}">Add New Book</a>
 
+    <!-- Keresési űrlap -->
+    <form method="GET" action="{{ route('books.index') }}">
+        <label for="filter">Search By:</label>
+        <select name="filter" id="filter">
+            <option value="author">Author</option>
+            <option value="title">Title</option>
+            <option value="id">ID</option>
+            <option value="isbn">ISBN</option>
+        </select>
+        <input type="text" name="search" placeholder="Search...">
+        <button type="submit">Search</button>
+    </form>
+
     <table>
         <thead>
             <tr>

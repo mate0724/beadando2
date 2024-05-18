@@ -67,9 +67,32 @@ class BookController extends Controller
         return redirect()->route('books.edit', $book)->with('success', 'Book updated successfully');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $books = Book::all();
+        $query = Book::query();
+
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $filter = $request->input('filter');
+            
+            switch ($filter) {
+                case 'author':
+                    $query->where('author', 'LIKE', "%{$search}%");
+                    break;
+                case 'title':
+                    $query->where('title', 'LIKE', "%{$search}%");
+                    break;
+                case 'id':
+                    $query->where('id', $search);
+                    break;
+                case 'isbn':
+                    $query->where('isbn', 'LIKE', "%{$search}%");
+                    break;
+            }
+        }
+
+        $books = $query->get();
+
         return view('books.index', compact('books'));
     }
 
