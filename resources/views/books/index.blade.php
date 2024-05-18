@@ -10,6 +10,10 @@
         <div>{{ session('success') }}</div>
     @endif
 
+    @if (session('error'))
+        <div>{{ session('error') }}</div>
+    @endif
+
     <a href="{{ route('books.create') }}">Add New Book</a>
 
     <table>
@@ -23,6 +27,7 @@
                 <th>Edition</th>
                 <th>ISBN</th>
                 <th>Available</th>
+                <th>Copies</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -37,12 +42,18 @@
                     <td>{{ $book->edition }}</td>
                     <td>{{ $book->isbn }}</td>
                     <td>{{ $book->available ? 'Yes' : 'No' }}</td>
+                    <td>{{ $book->copies }}</td>
                     <td>
                         <a href="{{ route('books.edit', $book->id) }}">Edit</a>
                         <form method="POST" action="{{ route('books.destroy', $book->id) }}" style="display:inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit">Delete</button>
+                        </form>
+                        <form method="POST" action="{{ route('books.destroyCopy', $book->id) }}" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">Delete Copy</button>
                         </form>
                     </td>
                 </tr>

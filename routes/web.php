@@ -47,3 +47,5 @@ Route::get('books/{book}/edit', [BookController::class, 'edit'])->name('books.ed
 Route::put('books/{book}', [BookController::class, 'update'])->name('books.update');
 Route::get('/books', [BookController::class, 'index'])->name('books.index');
 Route::resource('books', BookController::class);
+
+Route::delete('/books/{book}/copy', [BookController::class, 'destroyCopy'])->name('books.destroyCopy');

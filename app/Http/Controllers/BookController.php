@@ -76,5 +76,39 @@ class BookController extends Controller
     {
         return view('books.show', compact('book'));
     }
-    
+
+    public function destroy(Book $book)
+    {
+        
+        $borrowed = Borrowing::where('book_id', $book->id)->whereNull('returned_at')->exists();
+
+        if ($borrowed) {
+            return redirect()->route('books.index')->with('error', 'Cannot delete a borrowed book.');
+        }
+
+        $book->delete();
+
+        return redirect()->route('books.index')->with('success', 'Book deleted successfully.');
+    }
+
+    public function destroyCopy(Request $request, Book $book)
+    {
+        
+        $borrowed = Borrowing::where('book_id', $book->id)->whereNull('returned_at')->exists();
+
+        if ($borrowed) {
+            return redirect()->route('books.index')->with('error', 'Cannot delete a borrowed book copy.');
+        }
+
+        
+        if ($book->copies > 1) {
+            $book->copies -= 1;
+            $book->save();
+        } else {
+            $book->delete();
+        }
+
+        return redirect()->route('books.index')->with('success', 'Book copy deleted successfully.');
+    }
+
 }

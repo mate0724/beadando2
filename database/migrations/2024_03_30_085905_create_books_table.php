@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('edition');
             $table->string('ISBN')->unique();
             $table->boolean('available')->default(true);
+            $table->integer('copies')->default(1);
             $table->timestamps();
         });
     }
