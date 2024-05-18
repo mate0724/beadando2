@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -38,3 +39,11 @@ require __DIR__.'/auth.php';
 // Route::get('/rentedBook', function(){
 //     return view('rentedBook');
 // });
+
+
+Route::get('books/create', [BookController::class, 'create'])->name('books.create');
+Route::post('books', [BookController::class, 'store'])->name('books.store');
+Route::get('books/{book}/edit', [BookController::class, 'edit'])->name('books.edit');
+Route::put('books/{book}', [BookController::class, 'update'])->name('books.update');
+Route::get('/books', [BookController::class, 'index'])->name('books.index');
+Route::resource('books', BookController::class);
