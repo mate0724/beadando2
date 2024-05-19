@@ -13,15 +13,12 @@
                         Welcome to your Dashboard
                     </div>
 
-                    <div class="mt-6 text-gray-500">
-                        Choose an action:
-                    </div>
                 </div>
 
-                <div class="bg-gray-200 bg-opacity-25 grid grid-cols-1 md:grid-cols-2">
+                <div class="bg-gray-200 bg-opacity-25 grid grid-cols-1 md:grid-cols-2 gap-4 p-6">
                     <div class="p-6">
                         <div class="flex items-center">
-                            <a href="{{ route('books.create') }}" class="btn btn-primary">
+                            <a href="{{ route('books.create') }}" class="btn bg-gray-200 text-gray-800 rounded-lg py-2 px-4">
                                 Add Books
                             </a>
                         </div>
@@ -29,7 +26,7 @@
                     
                     <div class="p-6">
                         <div class="flex items-center">
-                            <a href="{{ route('books.index') }}" class="btn btn-primary">
+                            <a href="{{ route('books.index') }}" class="btn bg-gray-200 text-gray-800 rounded-lg py-2 px-4">
                                 List Books
                             </a>
                         </div>
@@ -37,7 +34,7 @@
 
                     <div class="p-6">
                         <div class="flex items-center">
-                            <a href="{{ route('members.create') }}" class="btn btn-primary">
+                            <a href="{{ route('members.create') }}" class="btn bg-gray-200 text-gray-800 rounded-lg py-2 px-4">
                                 Add Members
                             </a>
                         </div>
@@ -45,7 +42,7 @@
                     
                     <div class="p-6">
                         <div class="flex items-center">
-                            <a href="{{ route('members.index') }}" class="btn btn-primary">
+                            <a href="{{ route('members.index') }}" class="btn bg-gray-200 text-gray-800 rounded-lg py-2 px-4">
                                 List Members
                             </a>
                         </div>
@@ -53,7 +50,7 @@
                     
                     <div class="p-6">
                         <div class="flex items-center">
-                            <a href="{{ route('books.index') }}" class="btn btn-danger">
+                            <a href="{{ route('books.index') }}" class="btn bg-gray-200 text-gray-800 rounded-lg py-2 px-4">
                                 Delete Books
                             </a>
                         </div>

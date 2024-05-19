@@ -16,7 +16,7 @@
 
     <a href="{{ route('books.create') }}">Add New Book</a>
 
-    <!-- Keresési űrlap -->
+    
     <form method="GET" action="{{ route('books.index') }}">
         <label for="filter">Search By:</label>
         <select name="filter" id="filter">
