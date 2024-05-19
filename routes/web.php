@@ -4,9 +4,20 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
     return redirect('/register');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Könyvekhez kapcsolódó útvonalak
+    Route::resource('books', BookController::class);
+    
+    // Tagokhoz kapcsolódó útvonalak
+    Route::resource('members', MemberController::class);
 });
 
 Route::get('/dashboard', function () {
