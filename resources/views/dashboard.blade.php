@@ -55,6 +55,22 @@
                             </a>
                         </div>
                     </div>
+
+                    <div class="p-6">
+                        <div class="flex items-center">
+                            <a href="{{ route('borrowings.index') }}" class="btn bg-gray-200 text-gray-800 rounded-lg py-2 px-4">
+                                List Borrowings
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="p-6">
+                        <div class="flex items-center">
+                            <a href="{{ route('borrowings.create') }}" class="btn bg-gray-200 text-gray-800 rounded-lg py-2 px-4">
+                                Create Borrowings
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
