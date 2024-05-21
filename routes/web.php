@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\BorrowingController;
 use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
@@ -63,4 +64,5 @@ Route::resource('books', BookController::class);
 Route::delete('/books/{book}/copy', [BookController::class, 'destroyCopy'])->name('books.destroyCopy');
 
 Route::resource('members', MemberController::class);
+Route::resource('borrowings', BorrowingController::class);
 
