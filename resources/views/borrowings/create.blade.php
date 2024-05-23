@@ -9,13 +9,13 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
                 @if ($errors->any())
-                    <div class="bg-red-500 text-white p-4 mb-4 rounded">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
                 @endif
 
                 <form method="POST" action="{{ route('borrowings.store') }}">
@@ -27,7 +27,7 @@
                         </label>
                         <select name="book_id" id="book_id" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                             @foreach ($books as $book)
-                                <option value="{{ $book->id }}">{{ $book->title }}</option>
+                            <option value="{{ $book->id }}">{{ $book->title }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -38,7 +38,7 @@
                         </label>
                         <select name="member_id" id="member_id" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                             @foreach ($members as $member)
-                                <option value="{{ $member->id }}">{{ $member->name }}</option>
+                            <option value="{{ $member->id }}">{{ $member->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -51,7 +51,7 @@
                     </div>
 
                     <div class="flex items-center justify-between">
-                        <button type="submit" >
+                        <button type="submit">
                             Borrow Book
                         </button>
                     </div>

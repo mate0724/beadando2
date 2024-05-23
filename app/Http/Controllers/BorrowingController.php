@@ -28,17 +28,24 @@ class BorrowingController extends Controller
     {
         // Debugging - print the incoming request data
         // dd($request->all());
-    
+
         $request->validate([
             'book_id' => 'required|exists:books,id',
             'member_id' => 'required|exists:members,id',
             'borrowed_at' => 'required|date',
         ]);
-    
+
         $book = Book::findOrFail($request->book_id);
         $member = Member::findOrFail($request->member_id);
-    
-        // Determine due date based on member type
+
+        
+        $borrowedCount = Borrowing::where('book_id', $book->id)->whereNull('returned_at')->count();
+
+        if ($borrowedCount >= $book->copies) {
+            return redirect()->back()->withErrors(['error' => 'Nincs elérhető példány a könyvből.']);
+        }
+
+        
         $borrowedAt = Carbon::parse($request->borrowed_at);
         $dueDate = match ($member->type) {
             'student' => $borrowedAt->copy()->addMonths(2),
@@ -46,15 +53,14 @@ class BorrowingController extends Controller
             'external' => $borrowedAt->copy()->addMonth(),
             default => $borrowedAt->copy()->addWeeks(2),
         };
-    
+
         Borrowing::create([
             'book_id' => $request->book_id,
             'member_id' => $request->member_id,
             'borrowed_at' => $borrowedAt,
             'due_date' => $dueDate,
         ]);
-    
+
         return redirect()->route('borrowings.index')->with('success', 'Book borrowed successfully.');
     }
-    
 }
