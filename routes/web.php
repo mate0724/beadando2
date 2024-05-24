@@ -66,3 +66,5 @@ Route::delete('/books/{book}/copy', [BookController::class, 'destroyCopy'])->nam
 Route::resource('members', MemberController::class);
 Route::resource('borrowings', BorrowingController::class);
 
+Route::get('/members/{id}/borrowings', [BorrowingController::class, 'showBorrowings'])->name('members.borrowings');
+

@@ -38,14 +38,14 @@ class BorrowingController extends Controller
         $book = Book::findOrFail($request->book_id);
         $member = Member::findOrFail($request->member_id);
 
-        
+
         $borrowedCount = Borrowing::where('book_id', $book->id)->whereNull('returned_at')->count();
 
         if ($borrowedCount >= $book->copies) {
             return redirect()->back()->withErrors(['error' => 'Nincs elérhető példány a könyvből.']);
         }
 
-        
+
         $borrowedAt = Carbon::parse($request->borrowed_at);
         $dueDate = match ($member->type) {
             'student' => $borrowedAt->copy()->addMonths(2),
@@ -62,5 +62,24 @@ class BorrowingController extends Controller
         ]);
 
         return redirect()->route('borrowings.index')->with('success', 'Book borrowed successfully.');
+    }
+
+    public function showBorrowings($id)
+    {
+        $member = Member::findOrFail($id);
+
+        
+        $currentBorrowings = Borrowing::where('member_id', $id)
+            ->whereNull('returned_at')
+            ->with('book')
+            ->get();
+
+       
+        $pastBorrowings = Borrowing::where('member_id', $id)
+            ->whereNotNull('returned_at')
+            ->with('book')
+            ->get();
+
+        return view('borrowings.show', compact('member', 'currentBorrowings', 'pastBorrowings'));
     }
 }
