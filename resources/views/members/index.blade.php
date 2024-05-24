@@ -15,15 +15,14 @@
     <a href="{{ route('members.create') }}">Add New Member</a>
 
     <!-- Keresési űrlap -->
-    <form action="{{ route('members.index') }}" method="GET" class="mb-4">
-        <div class="flex space-x-2">
-            <input type="text" name="search" placeholder="Search..." class="form-input w-full">
-            <select name="field" class="form-select">
-                <option value="name">Name</option>
-                <option value="address">Address</option>
-            </select>
-            <button type="submit" class="bg-gray-500 text-white rounded px-4 py-2">Search</button>
-        </div>
+    <form method="GET" action="{{ route('members.index') }}">
+        <label for="filter">Search By:</label>
+        <select name="filter" id="filter">
+            <option value="name">Name</option>
+            <option value="address">Address</option>
+        </select>
+        <input type="text" name="search" placeholder="Search...">
+        <button type="submit">Search</button>
     </form>
 
     <table>
@@ -58,7 +57,7 @@
         </tbody>
     </table>
 
-    
+
 </body>
 
 </html>
