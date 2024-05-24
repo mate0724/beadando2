@@ -1,53 +1,61 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borrowings By Members</title>
+</head>
+<body>
+<div >
+    <h1 >{{ $member->name }} kölcsönzései</h1>
 
-@section('content')
-<div class="container mx-auto mt-4">
-    <h1 class="text-2xl font-bold mb-4">{{ $member->name }} kölcsönzései</h1>
-
-    <h2 class="text-xl font-semibold mb-2">Aktuális kölcsönzések</h2>
+    <h2 ">Aktuális kölcsönzések</h2>
     @if($currentBorrowings->isEmpty())
         <p>Nincsenek aktuális kölcsönzések.</p>
     @else
-        <table class="min-w-full bg-white border border-gray-200">
+        <table >
             <thead>
                 <tr>
-                    <th class="py-2 px-4 border-b">Könyv</th>
-                    <th class="py-2 px-4 border-b">Kölcsönzés dátuma</th>
+                    <th>Könyv</th>
+                    <th>Kölcsönzés dátuma</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($currentBorrowings as $borrowing)
                     <tr>
-                        <td class="py-2 px-4 border-b">{{ $borrowing->book->title }}</td>
-                        <td class="py-2 px-4 border-b">{{ $borrowing->borrowed_at }}</td>
+                        <td>{{ $borrowing->book->title }}</td>
+                        <td>{{ $borrowing->borrowed_at }}</td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
     @endif
 
-    <h2 class="text-xl font-semibold mt-4 mb-2">Korábbi kölcsönzések</h2>
+    <h2>Korábbi kölcsönzések</h2>
     @if($pastBorrowings->isEmpty())
         <p>Nincsenek korábbi kölcsönzések.</p>
     @else
-        <table class="min-w-full bg-white border border-gray-200">
+        <table>
             <thead>
                 <tr>
-                    <th class="py-2 px-4 border-b">Könyv</th>
-                    <th class="py-2 px-4 border-b">Kölcsönzés dátuma</th>
-                    <th class="py-2 px-4 border-b">Visszahozás dátuma</th>
+                    <th>Könyv</th>
+                    <th>Kölcsönzés dátuma</th>
+                    <th>Visszahozás dátuma</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($pastBorrowings as $borrowing)
                     <tr>
-                        <td class="py-2 px-4 border-b">{{ $borrowing->book->title }}</td>
-                        <td class="py-2 px-4 border-b">{{ $borrowing->borrowed_at }}</td>
-                        <td class="py-2 px-4 border-b">{{ $borrowing->returned_at }}</td>
+                        <td>{{ $borrowing->book->title }}</td>
+                        <td>{{ $borrowing->borrowed_at }}</td>
+                        <td>{{ $borrowing->returned_at }}</td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
     @endif
 </div>
-@endsection
+</body>
+</html>
+
+
