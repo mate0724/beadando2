@@ -103,8 +103,8 @@
 
                     <div class="p-6">
                         <div class="flex items-center">
-                            <a href="{{ route('members.create') }}" class="btn bg-gray-200 text-gray-800 rounded-lg py-2 px-4">
-                                Add Members
+                            <a href="{{ route('members.index') }}" class="btn bg-gray-200 text-gray-800 rounded-lg py-2 px-4">
+                                    Members
                             </a>
                         </div>
                     </div>

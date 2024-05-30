@@ -21,7 +21,7 @@ class BookController extends Controller
             'publisher' => 'required|string|max:255',
             'year' => 'required|integer|min:1000|max:'.(date('Y') + 1),
             'edition' => 'required|integer|min:1',
-            'isbn' => 'required|string|max:13|unique:books',
+            'ISBN' => 'required|string|max:13|unique:books',
             'available' => 'required|boolean',
         ]);
 
@@ -31,7 +31,7 @@ class BookController extends Controller
         $book->publisher = $request->publisher;
         $book->year = $request->year;
         $book->edition = $request->edition;
-        $book->isbn = $request->isbn;
+        $book->ISBN = $request->ISBN;
         $book->available = $request->available;
         $book->save();
 
@@ -51,7 +51,7 @@ class BookController extends Controller
             'publisher' => 'required|string|max:255',
             'year' => 'required|integer|min:1000|max:'.(date('Y') + 1),
             'edition' => 'required|integer|min:1',
-            'isbn' => 'required|string|max:13|unique:books,isbn,'.$book->id,
+            'ISBN' => 'required|string|max:13|unique:books,ISBN,'.$book->id,
             'available' => 'required|boolean',
         ]);
 
@@ -60,7 +60,7 @@ class BookController extends Controller
         $book->publisher = $request->publisher;
         $book->year = $request->year;
         $book->edition = $request->edition;
-        $book->isbn = $request->isbn;
+        $book->ISBN = $request->ISBN;
         $book->available = $request->available;
         $book->save();
 
@@ -85,8 +85,8 @@ class BookController extends Controller
                 case 'id':
                     $query->where('id', $search);
                     break;
-                case 'isbn':
-                    $query->where('isbn', 'LIKE', "%{$search}%");
+                case 'ISBN':
+                    $query->where('ISBN', 'LIKE', "%{$search}%");
                     break;
             }
         }

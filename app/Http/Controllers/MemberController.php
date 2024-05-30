@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Member;
+use App\Models\Borrowing;
 use Illuminate\Http\Request;
 
 class MemberController extends Controller
@@ -77,4 +78,15 @@ class MemberController extends Controller
 
         return redirect()->route('members.index')->with('success', 'Member deleted successfully.');
     }
+
+
+    public function show($id)
+    {
+        $member = Member::findOrFail($id);
+        $borrowing = Borrowing::where('member_id', $id)->get();
+/*         die(var_dump($borrowing)); */
+        return view('members.show')->with('member', $member)->with('borrowings', $borrowing);
+    }
+
+
 }

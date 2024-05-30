@@ -51,10 +51,11 @@
                     </div>
 
                     <div class="flex items-center justify-between">
-                        <button type="submit">
+                        <button type="submit" class="mybutton">
                             Borrow Book
                         </button>
                     </div>
+                    
                 </form>
             </div>
         </div>

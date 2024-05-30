@@ -1,61 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Borrowings By Members</title>
-</head>
-<body>
-<div >
-    <h1 >{{ $member->name }} kölcsönzései</h1>
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Borrowing Details') }}
+        </h2>
+    </x-slot>
 
-    <h2 ">Aktuális kölcsönzések</h2>
-    @if($currentBorrowings->isEmpty())
-        <p>Nincsenek aktuális kölcsönzések.</p>
-    @else
-        <table >
-            <thead>
-                <tr>
-                    <th>Könyv</th>
-                    <th>Kölcsönzés dátuma</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($currentBorrowings as $borrowing)
-                    <tr>
-                        <td>{{ $borrowing->book->title }}</td>
-                        <td>{{ $borrowing->borrowed_at }}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    @endif
-
-    <h2>Korábbi kölcsönzések</h2>
-    @if($pastBorrowings->isEmpty())
-        <p>Nincsenek korábbi kölcsönzések.</p>
-    @else
-        <table>
-            <thead>
-                <tr>
-                    <th>Könyv</th>
-                    <th>Kölcsönzés dátuma</th>
-                    <th>Visszahozás dátuma</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($pastBorrowings as $borrowing)
-                    <tr>
-                        <td>{{ $borrowing->book->title }}</td>
-                        <td>{{ $borrowing->borrowed_at }}</td>
-                        <td>{{ $borrowing->returned_at }}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    @endif
-</div>
-</body>
-</html>
-
-
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
+                
+            <p><strong>Book Title:</strong> {{ $borrowing->book->title }}</p>
+            <p><strong>Member Name:</strong> {{ $borrowing->member->name }}</p>
+            <p><strong>Borrowed At:</strong> {{ $borrowing->borrowed_at }}</p>
+            <p><strong>Due Date:</strong> {{ $borrowing->due_date }}</p>
+            <p><strong>Returned At:</strong> {{ $borrowing->returned_at ?? 'Not Returned' }}</p>
+            @if(!$borrowing->returned_at)
+            <a href="{{ route('borrowings.returnbook', $borrowing->id) }}" class="mybutton">Return</a>
+            @endif
+            <br>
+            <a href="{{ route('borrowings.index') }}" class="mybutton">Back to List</a>
+            </div>
+        </div>
+    </div>
+</x-app-layout>

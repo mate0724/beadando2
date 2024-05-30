@@ -63,23 +63,59 @@ class BorrowingController extends Controller
 
         return redirect()->route('borrowings.index')->with('success', 'Book borrowed successfully.');
     }
-
-    public function showBorrowings($id)
+    
+    public function update($id)
     {
-        $member = Member::findOrFail($id);
+        die("valami szöveget");
+        $borrowing = Borrowing::find($id);
+        $due = $borrowing->due_date;
+        $now = time();
+        
+        $borrowing->returned_at = $now;
+        
+        $borrowing->save();
+        
+        
+        $late = $now > $due ? true : false;
+        
+        
+        return view('dashboard');
+        /* return route('borrowings.index')->with('success', 'Returned successfully.'.($late ? " You LATE!" : " You returned in time.")); */
+    }
+
+    public function show($id)
+    {
+        $borrowing = Borrowing::findOrFail($id);    
+        return view('borrowings.show', compact('borrowing'));
+    }
+
+    public function returnbook($id)
+    {
+        $borrowing = Borrowing::findOrFail($id);
+
+        $now = Carbon::now();
+
+        $borrowing->returned_at = $now;
+        
+        $borrowing->save();
 
         
-        $currentBorrowings = Borrowing::where('member_id', $id)
-            ->whereNull('returned_at')
-            ->with('book')
-            ->get();
+        $late = $borrowing->due_date<$now;
+        if($late)
+        {
+            session()->flash('late', 'The return was late.');
+        }
+        else
+        {
+            session()->flash('intime', 'The return was in time.');
+        }
 
-       
-        $pastBorrowings = Borrowing::where('member_id', $id)
-            ->whereNotNull('returned_at')
-            ->with('book')
-            ->get();
-
-        return view('borrowings.show', compact('member', 'currentBorrowings', 'pastBorrowings'));
+        return redirect()->route('borrowings.index');
     }
+
+/*     public function list($id)
+    {
+        $borrowing = Borrowing::findOrFail($id);
+        return $borrowing;
+    } */
 }
